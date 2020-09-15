@@ -51,32 +51,65 @@ void main() {
 
 /* Printing function */
 void print_statistics ( float mean, float max, float min, float median ) {
+  printf ( "1. Maximum = %f \n", max );
+  printf ( "2. Minimum = %f \n", min );
+  printf ( "3. Mean = %f \n", mean );
+  printf ( "4. Median = %f \n \n", median );
   	
 }
 
 /* Calculating the mean value of the array */
 float find_mean ( unsigned char a[], unsigned int n ) {
-
+  int i;
+  float mean = 0, sum = 0;
+  for ( i = 0; i < n; i++ )
+    sum = sum + a[i];
+  mean = ( float ) sum / ( float ) n;
+  mean = floor(mean);
   return mean ;
   
 } 
 
 /* Finding the maximum value of the array */
 float find_maximum ( unsigned char a[], unsigned int n ) {
-
+  int i;
+  float max = 0;
+  for ( i = 0; i < n; i++ ){
+    if ( a[i] > max )
+      max = a[i];
+    
+  }
+  max = floor( max );
+  
   return max;
   
 }
 
 /* Finding the minimum value of the array */
 float find_minimum ( unsigned char a[], unsigned int n ) {
-
+  int i; 
+  float min = a[0];
+  for ( i = 1; i < n; i++ ){
+    if ( a[i] < min )
+      min = a[i];
+    
+  }
+  min = floor( min );
+  
   return min;
   
 }
 
 /* Finding the median value of the array */
 float find_median ( unsigned char a[], unsigned int n ) {
+  float median;
+  sort_array( a, n );
+  if ( n % 2 == 0 )
+    median = ( a[ ( n / 2 ) - 1 ] + a[ ( n / 2 ) ] ) / 2 ;
+  else 
+    median = a [ ( n - 1 ) / 2 ];
+    
+  median = floor( median );
   
   return median ;
   
@@ -84,12 +117,26 @@ float find_median ( unsigned char a[], unsigned int n ) {
 
 /* Sorting the array from big to small ( e.g. 5 3 1 ) */
 void sort_array ( unsigned char a[], unsigned int n ) {
- 
- 
+  int i, j;
+  unsigned char temp;
+  for( i = 0; i < n-1; i++ ) 
+    for( j = 0; j < n-1-i; j++ ) {
+      if ( a[j] < a[j+1] ){
+        temp = a[j];
+        a[j] = a[j+1];
+        a[j+1] = temp;
+	 }
+   }
+   
+		
 }
 
 /* Printing the array */
 void print_array ( unsigned char a[], unsigned int n ) {
+  int i;
+  printf("Printed array: \n");
+  for ( i = 0; i < n; i++ ) 
+    printf ( "%d " , a[i] );
 
 }
 
